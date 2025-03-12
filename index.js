@@ -34,7 +34,7 @@ app.get('/api/data', async (req, res) => {
 app.post('/api/login', async (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
-  const {user, error} = await supabase.from('userInfo').select('*').and(`email.eq.${email}, password.eq.${password}`);
+  const {user, error} = await supabase.from('userInfo').select('*').eq(`email`,email).eq('password', password);
   if (error) {
     res.json({error: error.message})
   } else {
